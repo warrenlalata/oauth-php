@@ -14,6 +14,13 @@ use Illuminate\Http\Request;
 */
 use App\Http\Resources\User as UserResource;
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return new UserResource($request->user());;
+Route::middleware(['auth:api',])->group(function () {
+    // user
+    Route::get('/user', function (Request $request) {
+        return new UserResource($request->user());;
+    });
+
+    // posts
+    Route::get('/posts', 'PostController@index');
+    Route::get('/posts/{id}', 'PostController@show');
 });
