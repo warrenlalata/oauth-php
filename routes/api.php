@@ -19,6 +19,7 @@ Route::middleware(['auth:api',])->group(function () {
     Route::get('/user', function (Request $request) {
         return new UserResource($request->user());;
     });
+    Route::delete('/logout', 'AuthController@logout');
 
     // posts
     Route::get('/posts', 'PostController@index');
